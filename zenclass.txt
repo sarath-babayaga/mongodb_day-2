@@ -1,0 +1,17 @@
+
+zenclass
+******************************
+
+
+1.   db.zenclass.find({ $and: [ {date: { $gte:ISODate("2022-10-15") } }, {date: { $lte:ISODate("2022-10-31") } } ] } )
+
+2.   db.drives.find({ start_date: { $gte: ISODate("2022-10-15"), $lte: ISODate("2022-10-31") } })
+
+3.   db.drives.aggregate([ { $lookup: { from: "students", localField: "_id", foreignField: "companydrive_id", as: students_appeared" } } ])
+
+4.   db.codekata.aggregate([ { $match: { solved_by: "user_id" } }, { $group: { _id: null, count: { $sum: 1 } } } ])
+
+5.   db.collection.aggregate([ { $lookup: { from: "collection", localField: "_id", foreignField: "mentor_id", as: "mentees" } }, { $match: { "mentees": { $size: { $gt: 15 } } } } ])
+
+6.   db.attendance.aggregate([ { $match: { date: { $gte: ISODate("2020-10-15"), $lte: ISODate("2020-10-31") }, status: "absent", task_submitted: false } }, { $group: {id: "$user_id", count: { $sum: 1 } } }, { $count: "total" } ])
+
